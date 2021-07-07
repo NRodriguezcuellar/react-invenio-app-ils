@@ -12,6 +12,7 @@ export default class CheckedInItems extends Component {
 
   renderItems = () => {
     const { items } = this.props;
+
     const entries = items.map((item) => {
       return (
         <ItemListEntry

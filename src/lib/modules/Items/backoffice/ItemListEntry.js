@@ -75,7 +75,7 @@ export class ItemListEntry extends Component {
             <ItemIcon /> {item.metadata.barcode}
           </Item.Header>
           <Grid columns={2}>
-            <Grid.Column computer={6} largeScreen={6}>
+            <Grid.Column computer={5} largeScreen={5}>
               <Item.Meta className="metadata-fields">
                 <Header as="h5">
                   <LiteratureTitle
@@ -83,17 +83,21 @@ export class ItemListEntry extends Component {
                     truncateLines={1}
                   />
                 </Header>
-                <List>
+                <List className="metadata-sharp">
                   <List.Item>
                     <List.Content>
-                      {item.metadata.internal_location.location.name} -{' '}
-                      {item.metadata.internal_location.name}
+                    <div class="ui label">
+                      <strong>{item.metadata.internal_location.location.name} -{' '}
+                      {item.metadata.internal_location.name}</strong>
+                    </div>
                     </List.Content>
                   </List.Item>
                   <List.Item>
                     <List.Content>
                       {' '}
-                      shelf <strong>{item.metadata.shelf}</strong>
+                      <div class="ui label">
+                        <strong>shelf {item.metadata.shelf}</strong>
+                      </div>
                     </List.Content>
                   </List.Item>
                 </List>
@@ -139,7 +143,7 @@ export class ItemListEntry extends Component {
                 showPreviousLoan={showPreviousLoan}
               />
             </Grid.Column>
-            <Grid.Column computer={2} largeScreen={2} textAlign="right">
+            <Grid.Column computer={3} largeScreen={3} textAlign="right">
               <Link
                 target="_blank"
                 to={BackOfficeRoutes.documentDetailsFor(
@@ -153,7 +157,6 @@ export class ItemListEntry extends Component {
                   <Button
                     compact
                     floated="right"
-                    color="blue"
                     as={Link}
                     target="_blank"
                     to={BackOfficeRoutes.documentDetailsFor(
