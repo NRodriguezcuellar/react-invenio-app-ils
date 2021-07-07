@@ -42,12 +42,6 @@ Item Overrides - REACT-INVENIO-APP-ILS
       right: 1rem;
     }
 
-    &:first-child{
-      .pid-field {
-        top: -0.2em;
-      }
-    }
-
     .document-type {
       font-size: 0.8rem;
       margin-top: 0.2em;
@@ -131,7 +125,7 @@ Item Overrides - REACT-INVENIO-APP-ILS
       }
 
       &.bkg-yellow {
-        background-color: #fff4bd !important;
+        background-color: ##ffffe6 !important;
       }
 
       .item-image-wrapper {

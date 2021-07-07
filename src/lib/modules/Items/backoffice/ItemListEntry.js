@@ -6,7 +6,7 @@ import _isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Grid, Header, Item, List } from 'semantic-ui-react';
+import { Button, Grid, Header, Item, List, Label } from 'semantic-ui-react';
 
 class ItemCirculation extends Component {
   render() {
@@ -75,7 +75,7 @@ export class ItemListEntry extends Component {
             <ItemIcon /> {item.metadata.barcode}
           </Item.Header>
           <Grid columns={2}>
-            <Grid.Column computer={6} largeScreen={6}>
+            <Grid.Column computer={5} largeScreen={5}>
               <Item.Meta className="metadata-fields">
                 <Header as="h5">
                   <LiteratureTitle
@@ -86,14 +86,18 @@ export class ItemListEntry extends Component {
                 <List>
                   <List.Item>
                     <List.Content>
-                      {item.metadata.internal_location.location.name} -{' '}
-                      {item.metadata.internal_location.name}
+                    <Label color="blue">
+                      <strong>{item.metadata.internal_location.location.name} -{' '}
+                      {item.metadata.internal_location.name}</strong>
+                    </Label>
                     </List.Content>
                   </List.Item>
                   <List.Item>
                     <List.Content>
                       {' '}
-                      shelf <strong>{item.metadata.shelf}</strong>
+                      <Label color="blue">
+                        <strong>shelf {item.metadata.shelf}</strong>
+                      </Label>
                     </List.Content>
                   </List.Item>
                 </List>
@@ -139,21 +143,12 @@ export class ItemListEntry extends Component {
                 showPreviousLoan={showPreviousLoan}
               />
             </Grid.Column>
-            <Grid.Column computer={2} largeScreen={2} textAlign="right">
-              <Link
-                target="_blank"
-                to={BackOfficeRoutes.documentDetailsFor(
-                  item.metadata.document_pid
-                )}
-              >
-                <DocumentIcon /> Document
-              </Link>
+            <Grid.Column computer={3} largeScreen={3} textAlign="right">
               {withPendingLoans && (
                 <Item.Extra>
                   <Button
                     compact
                     floated="right"
-                    color="blue"
                     as={Link}
                     target="_blank"
                     to={BackOfficeRoutes.documentDetailsFor(
