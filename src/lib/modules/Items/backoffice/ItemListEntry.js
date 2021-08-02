@@ -75,13 +75,20 @@ export class ItemListEntry extends Component {
             <ItemIcon /> {item.metadata.barcode}
           </Item.Header>
           <Grid columns={2}>
-            <Grid.Column computer={5} largeScreen={5}>
+            <Grid.Column computer={6} largeScreen={6}>
               <Item.Meta className="metadata-fields">
                 <Header as="h5">
+                <Link
+                  target="_blank"
+                  to={BackOfficeRoutes.documentDetailsFor(
+                    item.metadata.document_pid
+                  )}
+                >
                   <LiteratureTitle
                     title={item.metadata.document.title}
                     truncateLines={1}
                   />
+                </Link>
                 </Header>
                 <List>
                   <List.Item>
@@ -125,7 +132,6 @@ export class ItemListEntry extends Component {
                       </span>
                     </List.Content>
                   </List.Item>
-
                   <List.Item>
                     <List.Content>
                       restrictions
@@ -143,7 +149,7 @@ export class ItemListEntry extends Component {
                 showPreviousLoan={showPreviousLoan}
               />
             </Grid.Column>
-            <Grid.Column computer={3} largeScreen={3} textAlign="right">
+            <Grid.Column computer={2} largeScreen={2} textAlign="right">
               {withPendingLoans && (
                 <Item.Extra>
                   <Button
