@@ -16,18 +16,31 @@ export default class PatronCurrentLoans extends Component {
       activePage: props.initialPage,
       isSuccessMessageVisible: false,
       successMessage: '',
+      itemsPerPageManuallySet: null,
     };
   }
+
   componentDidMount() {
     this.fetchPatronCurrentLoans();
   }
 
+  setItemsPerPage = (items) => {
+    const { rowsPerPage } = this.props;
+    if (!Number.isInteger(items) || items === rowsPerPage) return;
+
+    this.setState(
+      { itemsPerPageManuallySet: items },
+      this.fetchPatronCurrentLoans
+    );
+  };
+
   fetchPatronCurrentLoans() {
-    const { activePage } = this.state;
+    const { activePage, itemsPerPageManuallySet } = this.state;
     const { patronPid, fetchPatronCurrentLoans, rowsPerPage } = this.props;
+
     fetchPatronCurrentLoans(patronPid, {
       page: activePage,
-      size: rowsPerPage,
+      size: itemsPerPageManuallySet || rowsPerPage,
     });
   }
 
@@ -41,7 +54,8 @@ export default class PatronCurrentLoans extends Component {
 
   render() {
     const { error, isLoading, loans, rowsPerPage } = this.props;
-    const { isSuccessMessageVisible, successMessage } = this.state;
+    const { isSuccessMessageVisible, successMessage, itemsPerPageManuallySet } =
+      this.state;
     const { activePage } = this.state;
     const currentUser = sessionManager.user;
     return (
@@ -89,7 +103,8 @@ export default class PatronCurrentLoans extends Component {
                   this.fetchPatronCurrentLoans
                 );
               }}
-              rowsPerPage={rowsPerPage}
+              setManualPageSize={this.setItemsPerPage}
+              rowsPerPage={itemsPerPageManuallySet || rowsPerPage}
               renderListEntry={(loan) => (
                 <LoansListEntry
                   loan={loan}
